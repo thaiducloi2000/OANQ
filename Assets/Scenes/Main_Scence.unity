@@ -306,8 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ddbc0b52ab1334bbdae7d0a5a588eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Little Kid
+  Player_Name: Little Kid
   point: 0
+  Chess: {fileID: 6891580169314388076, guid: 66ae442726d1cf4428dacb34edd61ac4, type: 3}
+  SpecialChess: {fileID: 873531700701352353, guid: 28d0a30d6aed6fc4c8ca473413f70c24, type: 3}
 --- !u!1 &105767258
 GameObject:
   m_ObjectHideFlags: 0

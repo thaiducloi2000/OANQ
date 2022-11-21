@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    public string name = "Little Kid";
+    public string Player_Name = "Little Kid";
     public int point = 0;
+    public GameObject Chess;
+    public GameObject SpecialChess;
 
     private void Awake()
     {

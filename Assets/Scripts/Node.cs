@@ -24,6 +24,8 @@ public class Node : MonoBehaviour,IPointerClickHandler
 
     private void Start()
     {
+        this.chessPrefab = Player.Instance.Chess;
+        this.specialChessPrefab = Player.Instance.SpecialChess;
         this.gameObject.tag = side;
         if(nodeType == NodeType.chess)
         {

@@ -568,8 +568,8 @@ MonoBehaviour:
   front: {fileID: 0}
   back: {fileID: 0}
   numChesstxt: {fileID: 8843862394081534387}
-  chessPrefab: {fileID: 6705402075998324148, guid: d941199d4a58fcb45adc75ea8e37c42c, type: 3}
-  specialChessPrefab: {fileID: 6688149642241925542, guid: 11eed2dfd1329ab4db9e7f27b8e628b7, type: 3}
+  chessPrefab: {fileID: 0}
+  specialChessPrefab: {fileID: 0}
   chessList: []
   isSelected: 0
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
