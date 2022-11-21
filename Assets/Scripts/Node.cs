@@ -20,9 +20,11 @@ public class Node : MonoBehaviour,IPointerClickHandler
     public bool isSelected = false;
     public Color defaultColor;
     public GameObject Collider;
+    public string side;
 
     private void Start()
     {
+        this.gameObject.tag = side;
         if(nodeType == NodeType.chess)
         {
             _Numchess = 5;
@@ -58,6 +60,9 @@ public class Node : MonoBehaviour,IPointerClickHandler
     private void spawnAtSide()
     {
         _CurrentNumchess++;
+        specialChessPrefab.transform.localScale = new Vector3(3f,3f,3f);
+        specialChessPrefab.GetComponent<SphereCollider>().radius = 0.35f;
+        specialChessPrefab.GetComponent<SphereCollider>().center = new Vector3(0f,0.35f,0f);
         GameObject chess = Instantiate(specialChessPrefab, transform.position + new Vector3(0f,0.5f,0f), Quaternion.identity,parent);
         //chess.transform.parent = this.transform;
         chessList.Add(chess);
@@ -68,10 +73,10 @@ public class Node : MonoBehaviour,IPointerClickHandler
     {
         this.Collider.SetActive(true);
         _CurrentNumchess++;
-        //float scaleSize = Chessboard.Instance.scaleSize;
         Vector3 position = new Vector3(0f,2F, 0f);
+        chessPrefab.GetComponent<SphereCollider>().radius = 0.3f;
+        chessPrefab.GetComponent<SphereCollider>().center = new Vector3(0f, 0.3f, 0f);
         GameObject chess = Instantiate(chessPrefab, transform.position + position, Quaternion.identity,parent);
-        //chess.transform.parent = this.transform;
         chessList.Add(chess);
         numChesstxt.text = _CurrentNumchess.ToString();
     }
@@ -81,49 +86,27 @@ public class Node : MonoBehaviour,IPointerClickHandler
         int num = _CurrentNumchess;
         for (int i = 0; i < chessList.Count; i++)
         {
-            Destroy(chessList[i]);
+            chessList[i].gameObject.GetComponent<Chess>().GetSlime();
         }
         chessList.Clear();
-        //StartCoroutine(RemoveChess());
         _CurrentNumchess = 0;
         numChesstxt.text= _CurrentNumchess.ToString();
         return num;
     }
 
-    //IEnumerator RemoveChess()
-    //{
-    //    for (int i = 0; i < chessList.Count; i++)
-    //    {
-    //        Animator ani = chessList[i].GetComponent<Animator>();
-    //        ani.SetBool("isDestroy", true);
-    //        Destroy(chessList[i]);
-    //        yield return new WaitForSeconds(1f);
-    //    }
-    //    chessList.Clear();
-    //}
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (MoveManager.instance.isPlayerMove == true)
+        if (MoveManager.instance.isPlayerMove == true && this.gameObject.tag != "B_Side")
         {
-            HightLight();
             MoveManager.instance.CheckNode(eventData.pointerEnter.GetComponentInParent<Node>());
         }
     }
 
     public void HightLight()
     {
-        isSelected = !isSelected;
-        if (isSelected == true)
-        {
             this.GetComponent<Renderer>().material.color = Color.red;
             this.front.GetComponent<Renderer>().material.color = Color.green;
             this.back.GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            EndHightlight();
-        }
     }
 
     public void EndHightlight()

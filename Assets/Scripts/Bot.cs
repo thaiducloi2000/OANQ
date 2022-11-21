@@ -42,7 +42,7 @@ public class Bot : MonoBehaviour
     private void Update()
     {
         isBot = !MoveManager.instance.isPlayerMove;
-        if (isBot == true)
+        if (isBot == true && MoveManager.instance.isPlayingAnimation == false)
         {
             if (countTime <= 0f)
             {
@@ -65,17 +65,19 @@ public class Bot : MonoBehaviour
         do
         {
             num_2 = rand.Next(0, nodes.Count);
-            Debug.Log(nodes[num_2].name + " Is 1");
-            Debug.Log(nodes[num_2].GetComponentInChildren<Node>().name + " Is 2");
         } while (nodes[num_2].GetComponentInChildren<Node>()._CurrentNumchess == 0);
         if (num_1 == 0)
         {
             MoveManager.instance.CheckNode(nodes[num_2].GetComponentInChildren<Node>());
+            nodes[num_2].GetComponentInChildren<Node>().back.GetComponent<Renderer>().material.color 
+                = nodes[num_2].GetComponentInChildren<Node>().back.defaultColor;
             MoveManager.instance.CheckNode(nodes[num_2].GetComponentInChildren<Node>().front);
         }
         else if (num_1 == 1)
         {
             MoveManager.instance.CheckNode(nodes[num_2].GetComponentInChildren<Node>());
+            nodes[num_2].GetComponentInChildren<Node>().front.GetComponent<Renderer>().material.color
+                = nodes[num_2].GetComponentInChildren<Node>().front.defaultColor;
             MoveManager.instance.CheckNode(nodes[num_2].GetComponentInChildren<Node>().back);
         }
     }

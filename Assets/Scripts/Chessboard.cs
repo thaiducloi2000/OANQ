@@ -26,20 +26,25 @@ public class Chessboard : MonoBehaviour
             GameObject node;
             if (i == 0)
             {
+                this.Node.gameObject.GetComponentInChildren<Node>().side = "Side";
                 node = Instantiate(Node, new Vector3(i * scaleSize, 0f, 0.5f * scaleSize), Quaternion.identity);
                 node.transform.GetChild(0).localScale = new Vector3(1 * scaleSize, 1f, 2f * scaleSize);
             }
             else if (i == 6)
             {
+                this.Node.gameObject.GetComponentInChildren<Node>().side = "Side";
                 node = Instantiate(Node, new Vector3(i * scaleSize, 0f, 0.5f * scaleSize), Quaternion.identity);
                 node.transform.GetChild(0).localScale = new Vector3(1 * scaleSize, 1f, 2f * scaleSize);
             }
             else if (i > 6)
             {
+                this.Node.gameObject.GetComponentInChildren<Node>().side = "B_Side";
                 node = Instantiate(Node, new Vector3((numNode - i) * scaleSize, 0f, 1f * scaleSize), Quaternion.identity);
+                
             }
             else
             {
+                this.Node.gameObject.GetComponentInChildren<Node>().side = "A_Side";
                 node = Instantiate(Node, new Vector3(i * scaleSize, 0f, 0f * scaleSize), Quaternion.identity);
             }
             node.transform.parent = this.transform;

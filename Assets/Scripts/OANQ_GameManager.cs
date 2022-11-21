@@ -5,13 +5,19 @@ using UnityEngine;
 public class OANQ_GameManager : MonoBehaviour
 {
     public static OANQ_GameManager instance;
-
+    public enum GameStatus { Pause,Playing}
+    public GameStatus status;
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+        this.status = GameStatus.Playing;
     }
 
+    public void EndGame()
+    {
+        UIManager.instance.QuitBtn();
+    }
 }

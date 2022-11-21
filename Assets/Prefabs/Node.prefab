@@ -29,7 +29,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8843862395210921605}
-  - {fileID: 4124051537852220539}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -148,15 +147,15 @@ Transform:
   m_GameObject: {fileID: 4124051537852220484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1995143887813357412}
   - {fileID: 3380338090642309295}
   - {fileID: 449297434298431186}
   - {fileID: 7396645373215282102}
-  m_Father: {fileID: 3488584539474531648}
-  m_RootOrder: 1
+  m_Father: {fileID: 8843862395210921605}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6601419480611588668
 GameObject:
@@ -278,7 +277,7 @@ Transform:
   m_Children:
   - {fileID: 8843862394081534384}
   m_Father: {fileID: 8843862395210921605}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8843862394081534385
 GameObject:
@@ -484,6 +483,7 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4124051537852220539}
   - {fileID: 8843862393827311953}
   m_Father: {fileID: 3488584539474531648}
   m_RootOrder: 0
@@ -568,9 +568,10 @@ MonoBehaviour:
   front: {fileID: 0}
   back: {fileID: 0}
   numChesstxt: {fileID: 8843862394081534387}
-  chessPrefab: {fileID: 4201139625861352452, guid: d992e5431ce17e74ca27500eac103c13, type: 3}
-  specialChessPrefab: {fileID: 7377051212354063206, guid: 20d4289c862f0b444b595a7f1ccf0ac4, type: 3}
+  chessPrefab: {fileID: 6705402075998324148, guid: d941199d4a58fcb45adc75ea8e37c42c, type: 3}
+  specialChessPrefab: {fileID: 6688149642241925542, guid: 11eed2dfd1329ab4db9e7f27b8e628b7, type: 3}
   chessList: []
   isSelected: 0
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   Collider: {fileID: 4124051537852220484}
+  side: 

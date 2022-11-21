@@ -9,6 +9,7 @@ public class MoveManager : MonoBehaviour
     public Node StartNode;
     public Node EndNode;
     public bool isPlayerMove = true;
+    public bool isPlayingAnimation = false;
     private void Awake()
     {
         if(instance == null)
@@ -22,6 +23,7 @@ public class MoveManager : MonoBehaviour
 
         if (StartNode == null && (node != Chessboard.Instance.listNode[0] || node != Chessboard.Instance.listNode[6]) && node._CurrentNumchess != 0)
         {
+            node.HightLight();
             StartNode = node;
             return;
         }
@@ -30,13 +32,13 @@ public class MoveManager : MonoBehaviour
             EndNode = node;
         }if(node == StartNode)
         {
+            node.EndHightlight();
             StartNode = null;
         }
         if (StartNode != null && EndNode != null)
         {
             Move(StartNode, EndNode);
-            StartNode.EndHightlight();
-            EndNode.EndHightlight();
+            this.isPlayingAnimation = true;
             StartNode = null;
             EndNode = null;
         }
@@ -44,7 +46,6 @@ public class MoveManager : MonoBehaviour
         {
             StartNode = null;
             EndNode = null;
-            node.EndHightlight();
             return;
         }
     }
@@ -59,6 +60,11 @@ public class MoveManager : MonoBehaviour
         else if(startNode.back == endNode)
         {
             StartCoroutine(MovingBack((startNode)));
+        }
+        if (isPlayingAnimation == false)
+        {
+            startNode.EndHightlight();
+            endNode.EndHightlight();
         }
     }
 
@@ -87,10 +93,12 @@ public class MoveManager : MonoBehaviour
                 }
                 if (isSide(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front))
                 {
+                    isPlayingAnimation = false;
                     yield break;
                 }
                 else if (overNumChess(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front, Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front.front))
                 {
+                    isPlayingAnimation = false;
                     yield break;
                 }
                 else if (GetPoint(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front, Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front.front))
@@ -103,17 +111,13 @@ public class MoveManager : MonoBehaviour
                     {
                         Bot.Instance.point += isGetPoint(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front.front);
                     }
-                    UIManager.instance.setPoint(Player.Instance.point.ToString(), Player.Instance.name, Bot.Instance.point.ToString());
+                    isPlayingAnimation = false;
                     yield break;
                 }
                 else //if (isCountinue(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front))
                 {
                     StartCoroutine(MovingFront(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().front));
                 }
-                //else
-                //{
-                //    yield break;
-                //}
             }
         }
     }
@@ -141,9 +145,11 @@ public class MoveManager : MonoBehaviour
                 }
                 if (isSide(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back))
                 {
+                    isPlayingAnimation = false;
                     yield break;
                 }else if (overNumChess(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back, Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back.back))
                 {
+                    isPlayingAnimation = false;
                     yield break;
                 }
                 else if(GetPoint(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back, Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back.back))
@@ -156,16 +162,13 @@ public class MoveManager : MonoBehaviour
                     {
                         Bot.Instance.point += isGetPoint(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back.back);
                     }
-                    UIManager.instance.setPoint(Player.Instance.point.ToString(), Player.Instance.name, Bot.Instance.point.ToString());
+                    isPlayingAnimation = false;
                     yield break;
                 }
                 else // if(isCountinue(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back))
                 {
                     StartCoroutine(MovingBack(Chessboard.Instance.listNode[pos].GetComponentInChildren<Node>().back));
-                } // else
-                //{
-                //    yield break;
-                //}
+                } 
             }
         }
     }
@@ -174,11 +177,6 @@ public class MoveManager : MonoBehaviour
     {
         return lastNode == Chessboard.Instance.listNode[0].GetComponentInChildren<Node>() || lastNode == Chessboard.Instance.listNode[6].GetComponentInChildren<Node>();
     }
-
-    //private bool isCountinue(Node lastNode)
-    //{
-    //    return lastNode._CurrentNumchess != 0 && (lastNode != Chessboard.Instance.listNode[0].GetComponentInChildren<Node>() || lastNode != Chessboard.Instance.listNode[6].GetComponentInChildren<Node>());
-    //}
 
     private bool overNumChess(Node lastNode, Node nextLastnode)
     {

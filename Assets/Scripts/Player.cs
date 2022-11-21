@@ -22,4 +22,19 @@ public class Player : MonoBehaviour
     {
         DontDestroyOnLoad(this);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (OANQ_GameManager.instance.status == OANQ_GameManager.GameStatus.Playing)
+            {
+                OANQ_GameManager.instance.status = OANQ_GameManager.GameStatus.Pause;
+            }
+            else
+            {
+                OANQ_GameManager.instance.status = OANQ_GameManager.GameStatus.Playing;
+            }
+        }
+    }
 }
