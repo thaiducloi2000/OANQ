@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI point;
     [SerializeField] public TextMeshProUGUI Botpoint;
     public static UIManager instance;
+    public Color32 selectColor = new Color32(255,0,0,1);
+    public Color32 deSelectColor = new Color32(255,255,255,255);
     // Start is called before the first frame update
 
     public GameObject GamePlay_UI;
@@ -68,4 +70,5 @@ public class UIManager : MonoBehaviour
     {
         OANQ_GameManager.instance.status = OANQ_GameManager.GameStatus.Pause;
     }
+
 }
